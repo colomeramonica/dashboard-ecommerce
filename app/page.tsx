@@ -49,7 +49,7 @@ export default function Home() {
         <SalesInformationCard title="Preço médio por item" value="R$1,16 mil" />
       </div>
       <div className="flex flex-col md:flex-row justify-between mx-4 md:mx-10">
-        <div className="w-[500px] md:w-[1/2] p-2">
+        <div className="w-full md:w-[1/2] p-2">
           <Card className="flex flex-col p-4 w-full max-h-auto gap-3 rounded-xl">
             <CardHeader className="font-bold text-xl">
               Pedidos feitos (nos últimos 30 dias)
