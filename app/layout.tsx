@@ -35,7 +35,7 @@ export default function RootLayout({
       <head />
       <body
         className={clsx(
-          "min-h-screen bg-slate-100  dark:bg-slate-700 font-sans antialiased",
+          "h-full bg-slate-100  dark:bg-slate-700 font-sans antialiased",
           fontSans.variable,
         )}
       >

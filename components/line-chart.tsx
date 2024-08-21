@@ -1,15 +1,18 @@
 "use client";
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 
-const LineChart = ({ data, size }: { data: number[]; size: number }) => {
-  const height = size / 2 + 70;
+const LineChart = ({ data }: { data: number[] }) => {
+  const [chartWidth, setChartWidth] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const height = 200;
   const numLines = 5;
 
   const maxDataValue = Math.max(...data);
 
   const points = data
     .map((point, index) => {
-      const x = (index / (data.length - 1)) * size;
+      const x = (index / (data.length - 1)) * chartWidth;
       const y = height - (point / maxDataValue) * height;
 
       return `${x},${y}`;
@@ -29,7 +32,7 @@ const LineChart = ({ data, size }: { data: number[]; size: number }) => {
           stroke="#e0e0e0"
           strokeWidth="1"
           x1="60"
-          x2={size}
+          x2={chartWidth}
           y1={y}
           y2={y}
         />,
@@ -52,11 +55,36 @@ const LineChart = ({ data, size }: { data: number[]; size: number }) => {
     return lines;
   };
 
+  useEffect(() => {
+    if (containerRef.current) {
+      const handleResize = () => {
+        setChartWidth(containerRef.current!.offsetWidth);
+      };
+
+      handleResize();
+      window.addEventListener("resize", handleResize);
+
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }
+  }, []);
+
   return (
-    <svg height={height} width={size}>
-      {gridLines()}
-      <polyline fill="none" points={points} stroke="#b134eb" strokeWidth="2" />
-    </svg>
+    <div
+      ref={containerRef}
+      className="flex flex-col items-center justify-center w-full"
+    >
+      <svg height={height + 30} width={chartWidth}>
+        {gridLines()}
+        <polyline
+          fill="none"
+          points={points}
+          stroke="#b134eb"
+          strokeWidth="2"
+        />
+      </svg>
+    </div>
   );
 };
 
