@@ -1,16 +1,15 @@
 "use client";
 import React from "react";
 
-const LineChart = ({ data }: { data: number[] }) => {
-  const width = 700;
-  const height = 380;
+const LineChart = ({ data, size }: { data: number[]; size: number }) => {
+  const height = size / 2 + 70;
   const numLines = 5;
 
   const maxDataValue = Math.max(...data);
 
   const points = data
     .map((point, index) => {
-      const x = (index / (data.length - 1)) * width;
+      const x = (index / (data.length - 1)) * size;
       const y = height - (point / maxDataValue) * height;
 
       return `${x},${y}`;
@@ -30,7 +29,7 @@ const LineChart = ({ data }: { data: number[] }) => {
           stroke="#e0e0e0"
           strokeWidth="1"
           x1="60"
-          x2={width}
+          x2={size}
           y1={y}
           y2={y}
         />,
@@ -54,7 +53,7 @@ const LineChart = ({ data }: { data: number[] }) => {
   };
 
   return (
-    <svg height={height + 30} width={width}>
+    <svg height={height} width={size}>
       {gridLines()}
       <polyline fill="none" points={points} stroke="#b134eb" strokeWidth="2" />
     </svg>

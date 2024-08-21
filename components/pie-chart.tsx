@@ -75,9 +75,11 @@ const PieChart = ({ data, size }: { data: any[]; size: number }) => {
   );
 
   return (
-    <svg height={size} width={size}>
-      {slices}
-    </svg>
+    <div className="flex flex-col items-center justify-center">
+      <svg height={size} width={size}>
+        {slices}
+      </svg>
+    </div>
   );
 };
 
