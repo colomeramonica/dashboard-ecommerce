@@ -59,7 +59,7 @@ export default function Home() {
       </div>
       <div className="flex flex-col md:flex-row justify-between mx-4 md:mx-10">
         <div className="w-full md:w-1/2 p-2">
-          <Card className="flex flex-col p-4 max-w-full max-h-auto gap-3 bg-white rounded-xl">
+          <Card className="flex flex-col p-4 max-w-full max-h-auto gap-3 rounded-xl">
             <CardHeader className="font-bold text-xl">
               Pedidos feitos (nos últimos 30 dias)
             </CardHeader>
@@ -72,7 +72,7 @@ export default function Home() {
           </Card>
         </div>
         <div className="w-full md:w-1/2 p-2">
-          <Card className="flex flex-col justify-center p-4 max-w-full max-h-auto gap-3 bg-white rounded-xl">
+          <Card className="flex flex-col justify-center p-4 max-w-full max-h-auto gap-3 rounded-xl">
             <CardHeader className="font-bold text-xl">
               Pedidos feitos (nos últimos 30 dias)
             </CardHeader>
