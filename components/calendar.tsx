@@ -46,10 +46,11 @@ const Calendar: React.FC = () => {
         {days.map((day, index) => (
           <div
             key={index}
-            className={`flex justify-center items-center h-20 p-2 rounded-lg ${day.isSame(currentDate, "month")
-              ? "bg-blue-100"
-              : "bg-gray-100 text-gray-400"
-              }`}
+            className={`flex justify-center items-center h-20 p-2 rounded-lg ${
+              day.isSame(currentDate, "month")
+                ? "bg-blue-100"
+                : "bg-gray-100 text-gray-400"
+            }`}
           >
             {day.format("D")}
           </div>

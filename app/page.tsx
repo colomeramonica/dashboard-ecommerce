@@ -1,6 +1,5 @@
 "use client";
 import { Card, CardBody, CardHeader } from "@nextui-org/react";
-import { useEffect, useState } from "react";
 
 import SalesInformationCard from "@/components/cards";
 import LineChart from "@/components/line-chart";
@@ -8,22 +7,6 @@ import { Navbar } from "@/components/navbar";
 import PieChart from "@/components/pie-chart";
 
 export default function Home() {
-  const [windowWidth, setWindowWidth] = useState(0);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const handleResize = () => {
-        setWindowWidth(window.innerWidth);
-      };
-
-      window.addEventListener("resize", handleResize);
-
-      return () => {
-        window.removeEventListener("resize", handleResize);
-      };
-    }
-  }, []);
-
   const mostPopularProducts = [
     {
       label: "Produto 1",
