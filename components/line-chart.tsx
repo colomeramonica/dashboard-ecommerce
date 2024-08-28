@@ -4,6 +4,7 @@ import React, { useRef, useEffect, useState } from "react";
 const LineChart = ({ data }: { data: number[] }) => {
   const [chartWidth, setChartWidth] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
 
   const height = 200;
   const numLines = 5;
@@ -70,10 +71,24 @@ const LineChart = ({ data }: { data: number[] }) => {
     }
   }, []);
 
+  const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
+    setIsDragging(true);
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/plain", e.currentTarget.id);
+  };
+
+  const handleDragEnd = () => {
+    setIsDragging(false);
+  };
+
   return (
     <div
       ref={containerRef}
       className="flex flex-col items-center justify-center w-full"
+      id="draggable-card"
+      draggable
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
     >
       <svg height={height + 30} width={chartWidth}>
         {gridLines()}

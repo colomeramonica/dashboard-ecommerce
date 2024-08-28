@@ -67,10 +67,25 @@ const PieChart = ({ data }: { data: { label: string; value: number }[] }) => {
     );
   });
 
+  const [isDragging, setIsDragging] = useState(false);
+
+  const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
+    setIsDragging(true);
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/plain", e.currentTarget.id);
+  };
+
+  const handleDragEnd = () => {
+    setIsDragging(false);
+  };
+
   return (
     <div
       className="flex items-center justify-center w-full h-full"
-      id="chart-container"
+      id="draggable-card"
+      draggable
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
     >
       <svg height={size} viewBox={`0 0 ${size} ${size}`} width={size}>
         {slices}
