@@ -8,7 +8,7 @@ export default function SalesInformationCard({
   value,
 }: {
   title: string;
-  value: string;
+  value: number;
 }) {
   return (
     <section className="flex flex-row items-center justify-center lg:px-3 py-8 md:py-10">

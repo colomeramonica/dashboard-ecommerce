@@ -47,7 +47,7 @@ const LineChart = ({ data }: { data: number[] }) => {
           x="5"
           y={y}
         >
-          {Math.round(step * (numLines - i))} mil
+          R${Math.round(step * (numLines - i))}
         </text>,
       );
     }

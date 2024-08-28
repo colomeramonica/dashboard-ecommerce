@@ -5,7 +5,7 @@ const PieChart = ({ data }: { data: { label: string; value: number }[] }) => {
   const [size, setSize] = useState(0);
 
   const total = data.reduce((sum, { value }) => sum + value, 0);
-  const colors = ["#a134eb", "#345eeb", "#eb349b", "#ff6b6b", "#1e90ff"];
+  const colors = ["#a134eb", "#345eeb", "#eb349b", "#ff6b6b", "#1e90ff", "#53f522"];
 
   let cumulativeValue = 0;
 
@@ -26,7 +26,7 @@ const PieChart = ({ data }: { data: { label: string; value: number }[] }) => {
   const radius = size / 2;
   const center = radius;
 
-  const slices = data.map(({ value }, index) => {
+  const slices = data.map(({ value, label }, index) => {
     const startAngle = (cumulativeValue / total) * 2 * Math.PI;
     const sliceAngle = (value / total) * 2 * Math.PI;
     const endAngle = startAngle + sliceAngle;
@@ -38,16 +38,32 @@ const PieChart = ({ data }: { data: { label: string; value: number }[] }) => {
 
     const largeArcFlag = sliceAngle > Math.PI ? 1 : 0;
 
+    // Calculate the midpoint angle for the label
+    const midAngle = startAngle + sliceAngle / 2;
+    const labelX = center + (radius / 1.5) * Math.cos(midAngle);
+    const labelY = center + (radius / 1.5) * Math.sin(midAngle);
+
     cumulativeValue += value;
 
     return (
-      <path
-        key={index}
-        d={`M${center}, ${center} L${x1}, ${y1} A${radius}, ${radius} 0 ${largeArcFlag} 1 ${x2},${y2} Z`}
-        fill={colors[index % colors.length]}
-        stroke="#ffffff"
-        strokeWidth="2"
-      />
+      <g key={index}>
+        <path
+          d={`M${center}, ${center} L${x1}, ${y1} A${radius}, ${radius} 0 ${largeArcFlag} 1 ${x2},${y2} Z`}
+          fill={colors[index % colors.length]}
+          stroke="#ffffff"
+          strokeWidth="2"
+        />
+        <text
+          x={labelX}
+          y={labelY}
+          fill="#000"
+          fontSize="10"
+          textAnchor="middle"
+          dominantBaseline="middle"
+        >
+          {label}
+        </text>
+      </g>
     );
   });
 
